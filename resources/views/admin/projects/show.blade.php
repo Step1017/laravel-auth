@@ -4,6 +4,12 @@
     <div class="container-fluid mt-4">
         <div class="row justify-content-center mb-4">
             <div class="col">
+                @if (session('success'))
+                <div class="alert alert-success mb-4">
+                    {{ session('success') }}
+                </div>
+                    
+                @endif
                 <h1>
                     {{ $project->title }}
                 </h1>

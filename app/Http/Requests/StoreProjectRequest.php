@@ -13,7 +13,7 @@ class StoreProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,10 @@ class StoreProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => 'required|max:255|unique:projects,title', //unique:projects,title fa in modo che il titolo di ogni progetto sia unico, di conseguenza anche lo slug
+            'description'=> 'required|max:2000',
+            'link'=> 'required|max:255|url|unique:projects,link',
+            'preview'=> 'required|max:255|url'
         ];
     }
 }

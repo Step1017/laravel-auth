@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 //Importazione Models:
 use App\Models\Project;
 
+//Importazione Requests:
+use App\Http\Requests\StoreProjectRequest;
+
+//Importazione Helpers:
+use Illuminate\Support\Str;
 class ProjectController extends Controller
 {
     /**
@@ -33,7 +38,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -42,9 +47,28 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProjectRequest $request)
     {
-        //
+        
+        // $slug = Str::slug($data['title']);
+        // dd($slug);
+        
+        // $newProject = Project::create([
+            //     'title' => $data['title'],
+            //     'slug' => $slug,
+            //     'description' => $data['description'],
+            //     'link' => $data['link'],
+            //     'preview' =>$data['preview']
+            // ]);
+            
+            //--------- ALTERNATIVA ----------
+            
+        $data = $request->validated();
+        $data['slug'] = Str::slug($data['title']);
+
+        $newProject = Project::create($data);
+
+        return redirect()->route('admin.projects.show', $newProject->id)->with('success', 'Progetto aggiunto con successo');
     }
 
     /**
