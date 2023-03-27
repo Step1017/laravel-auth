@@ -12,6 +12,7 @@
                 </a>
             </div>
         </div>
+        @include('partials.success')
         <div class="row">
             <div class="col">
                 <table class="table">
@@ -39,9 +40,13 @@
                                     <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning">
                                         Modifica
                                     </a>
-                                    <button class="btn btn-danger">
-                                        Elimina
-                                    </button>
+                                    <form class="d-inline block" action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Sei sicura/o di voler eliminare questo progetto? Non sarai più in grado di recuperarlo!');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger">
+                                            Elimina
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
