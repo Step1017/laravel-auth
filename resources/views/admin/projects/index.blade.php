@@ -37,7 +37,7 @@
                                         Dettagli
                                     </a>
                                     <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning">
-                                        Aggiorna
+                                        Modifica
                                     </a>
                                     <button class="btn btn-danger">
                                         Elimina

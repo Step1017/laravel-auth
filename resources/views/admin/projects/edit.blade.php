@@ -5,15 +5,16 @@
         <div class="row justify-content-center mb-4">
             <div class="col">
                 <h1>
-                    Crea Progetto
+                    Modifica Progetto
                 </h1>
             </div>
         </div>
         @include('partials.errors')
         <div class="row mb-4">
             <div class="col">
-                <form action="{{ route('admin.projects.store') }}" method="POST">
+                <form action="{{ route('admin.projects.update', $project->id) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="mb-3">
                         <label for="title" class="form-label">Titolo<span class="text-danger">*</span></label>
                         <input 
@@ -23,7 +24,7 @@
                             name="title"
                             required
                             maxlength="128"
-                            value="{{ old('title') }}" 
+                            value="{{ old('title', $project->title) }}" 
                             placeholder="Inserisci il titolo...">
                     </div>
                     <div class="mb-3">
@@ -34,7 +35,7 @@
                             name="description"
                             required
                             maxlength="2000"
-                            placeholder="Inserisci la descrizione..."> {{ old('description') }}
+                            placeholder="Inserisci la descrizione..."> {{ old('description', $project->description) }}
                         </textarea>
                     </div>
                     <div class="mb-3">
@@ -46,7 +47,7 @@
                             name="link"
                             required
                             maxlength="255"
-                            value="{{ old('link') }}" 
+                            value="{{ old('link', $project->link) }}" 
                             placeholder="Inserisci il link del progetto...">
                     </div>
                     <div class="mb-3">
@@ -58,7 +59,7 @@
                             name="preview"
                             required
                             maxlength="255"
-                            value="{{ old('preview') }}" 
+                            value="{{ old('preview', $project->preview) }}" 
                             placeholder="Inserisci anteprima del progetto...">
                     </div>
                     <div>
@@ -70,7 +71,7 @@
                         <a href="{{ route('admin.projects.index') }}" class="btn btn-warning text-light">
                             <i class="fa-solid fa-rotate-left"></i>
                         </a>
-                        <button type="submit" class="btn btn-success">Crea</button>
+                        <button type="submit" class="btn btn-success">Modifica</button>
                     </div>
                 </form>
             </div>
