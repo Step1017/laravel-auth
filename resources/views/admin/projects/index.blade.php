@@ -35,15 +35,18 @@
                                 <td>{{ $project->preview }}</td>
                                 <td>
                                     <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-primary">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
                                         Dettagli
                                     </a>
-                                    <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning">
+                                    <a href="{{ route('admin.projects.edit', $project->id) }}" class="btn btn-warning text-light">
+                                        <i class="fa-solid fa-pencil text-light"></i>
                                         Modifica
                                     </a>
                                     <form class="d-inline block" action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Sei sicura/o di voler eliminare questo progetto? Non sarai più in grado di recuperarlo!');">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger">
+                                            <i class="fa-solid fa-trash-can"></i>
                                             Elimina
                                         </button>
                                     </form>
