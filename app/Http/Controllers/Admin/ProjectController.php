@@ -14,6 +14,10 @@ use App\Http\Requests\UpdateProjectRequest;
 //Importazione Helpers:
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
+
+//Importazione Mails:
+use App\Mail\NewProject;
 class ProjectController extends Controller
 {
     /**
@@ -74,6 +78,8 @@ class ProjectController extends Controller
         $data['slug'] = Str::slug($data['title']);
 
         $newProject = Project::create($data);
+
+        Mail::to('stefania@classe84.com')->send(new NewProject($newProject));
 
         return redirect()->route('admin.projects.show', $newProject->id)->with('success', 'Progetto aggiunto con successo');
     }
