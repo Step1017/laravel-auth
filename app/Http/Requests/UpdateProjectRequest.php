@@ -38,7 +38,8 @@ class UpdateProjectRequest extends FormRequest
                 'url',
                 Rule::unique('projects')->ignore($this->project)
             ],
-            'preview'=> 'required|max:255|url'
+            'image'=> 'nullable|max:2048|image',
+            'delete_img' => 'nullable'
         ];
     }
 }

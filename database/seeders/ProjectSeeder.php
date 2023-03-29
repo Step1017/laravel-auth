@@ -28,7 +28,7 @@ class ProjectSeeder extends Seeder
                 'slug' => Str::slug($title),
                 'description' => $faker->paragraph(5),
                 'link' => $faker->url(),
-                'preview' => $faker->url()
+                'image' => $faker->image('public/storage', 640, 480, null, true) //genera img casuale e la salva nel percorso specificato, il primo valore(640) indica larghezza, il secondo l'altezza, il terzo la categoria(in questo caso casuale) e il quarto specifica se si vuole generare una miniatura
             ]);
         }
     }

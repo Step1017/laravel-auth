@@ -12,7 +12,7 @@
         @include('partials.errors')
         <div class="row mb-4">
             <div class="col">
-                <form action="{{ route('admin.projects.store') }}" method="POST">
+                <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Titolo<span class="text-danger">*</span></label>
@@ -50,15 +50,13 @@
                             placeholder="Inserisci il link del progetto...">
                     </div>
                     <div class="mb-3">
-                        <label for="preview" class="form-label">Preview<span class="text-danger">*</span></label>
+                        <label for="preview" class="form-label">Preview</label>
                         <input 
-                            type="text" 
+                            type="file" 
                             class="form-control" 
-                            id="preview"
-                            name="preview"
-                            required
-                            maxlength="255"
-                            value="{{ old('preview') }}" 
+                            id="image"
+                            name="image"
+                            accept="image/*" 
                             placeholder="Inserisci anteprima del progetto...">
                     </div>
                     <div>

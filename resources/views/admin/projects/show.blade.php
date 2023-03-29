@@ -8,10 +8,12 @@
                 <h1>
                     {{ $project->title }}
                 </h1>
-                <h2>
-                    {{ $project->preview }} {{-- Aggiungere immagine --}}
-                </h2>
-                <h6>
+                @if ($project->image)
+                    <div>
+                        <img src="{{ asset('storage/'.$project->image) }}" style="width: 300px" alt="">
+                    </div>
+                @endif
+                <h6> 
                     Slug: {{ $project->slug }}
                 </h6>
                 <p>

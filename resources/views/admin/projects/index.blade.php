@@ -32,7 +32,7 @@
                                 <td>{{ $project->slug }}</td>
                                 <td>{{ $project->description }}</td>
                                 <td>{{ $project->link }}</td>
-                                <td><img src="{{ asset('/storage/baby_yoda.jpg') }}" class="w-100" alt="Baby Yoda"></td>
+                                <td>{{ $project->image }}</td>
                                 <td>
                                     <a href="{{ route('admin.projects.show', $project->id) }}" class="btn btn-primary">
                                         <i class="fa-solid fa-magnifying-glass"></i>

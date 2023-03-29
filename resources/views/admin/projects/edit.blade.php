@@ -12,7 +12,7 @@
         @include('partials.errors')
         <div class="row mb-4">
             <div class="col">
-                <form action="{{ route('admin.projects.update', $project->id) }}" method="POST">
+                <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
@@ -51,15 +51,24 @@
                             placeholder="Inserisci il link del progetto...">
                     </div>
                     <div class="mb-3">
-                        <label for="preview" class="form-label">Preview<span class="text-danger">*</span></label>
+                        <label for="preview" class="form-label">Preview</label>
+                            @if ($project->image)
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" value="" name="delete_img" id="delete_img">
+                                    <label class="form-check-label" for="delete_img">
+                                        Cancella immagine
+                                    </label>
+                                </div>
+                                <div class="mb-2">
+                                    <img src="{{ asset('storage/'.$project->image) }}" style="width: 300px" alt="">
+                                </div>
+                            @endif
                         <input 
-                            type="text" 
+                            type="file" 
                             class="form-control" 
-                            id="preview"
-                            name="preview"
-                            required
-                            maxlength="255"
-                            value="{{ old('preview', $project->preview) }}" 
+                            id="image"
+                            name="image"
+                            accept="image/*" 
                             placeholder="Inserisci anteprima del progetto...">
                     </div>
                     <div>

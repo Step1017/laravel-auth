@@ -13,6 +13,7 @@ use App\Http\Requests\UpdateProjectRequest;
 
 //Importazione Helpers:
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 class ProjectController extends Controller
 {
     /**
@@ -64,6 +65,12 @@ class ProjectController extends Controller
             //--------- ALTERNATIVA ----------
             
         $data = $request->validated();
+        
+        if (array_key_exists('image', $data)) {
+            $imagePath = Storage::put('uploads', $data['image']);
+            $data['image'] = $imagePath;
+        } 
+
         $data['slug'] = Str::slug($data['title']);
 
         $newProject = Project::create($data);
@@ -108,6 +115,25 @@ class ProjectController extends Controller
     {
         $data = $request->validated();
 
+        if(array_key_exists('delete_img', $data)) {
+            if ($project->image) {
+                Storage::delete($project->image);
+
+                $project->image = null;
+                $project->save();
+            }
+        }
+
+        else if (array_key_exists('image', $data)) {
+            $imagePath = Storage::put('uploads', $data['image']);
+            $data['image'] = $imagePath;
+
+            if ($project->image) {
+                Storage::delete($project->image);
+            }
+        } 
+        
+
         $data['slug'] = Str::slug($data['title']);
 
         $project->update($data);
@@ -123,6 +149,10 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
+        if ($project->image) {
+            Storage::delete($project->image);
+        }
+
         $project->delete();
 
         return redirect()->route('admin.projects.index')->with('success', 'Progetto eliminato con successo!');

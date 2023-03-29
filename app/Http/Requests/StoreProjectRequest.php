@@ -27,7 +27,7 @@ class StoreProjectRequest extends FormRequest
             'title' => 'required|max:255|unique:projects,title', //unique:projects,title fa in modo che il titolo di ogni progetto sia unico, di conseguenza anche lo slug
             'description'=> 'required|max:2000',
             'link'=> 'required|max:255|url|unique:projects,link',
-            'preview'=> 'required|max:255|url'
+            'image'=> 'nullable|max:2048|image'
         ];
     }
 }
